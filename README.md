@@ -17,7 +17,7 @@ and deployed homogeneously.  Of course, it gets more interesting when you
 [port the YAML configuration to real code](https://github.com/pulumi/examples/tree/master/kubernetes-ts-guestbook),
 eliminating the need to do string substitution, and unlocking the full power of programming languages.
 
-<img src="./examples/guestbook-aws-elasticache/images/up.png" width=600 />
+<img src="./examples/guestbook-aws-elasticache/images/up.png" />
 
 pk8syaml is published to NPM, and may be installed simply as
 
