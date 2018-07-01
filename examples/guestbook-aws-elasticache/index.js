@@ -26,4 +26,6 @@ const configs = [
 ];
 
 // Finally, when the files are loaded, and patched, we can apply the configuration safely.
-Promise.all(configs).then(pk8syaml.applyObjects);
+Promise.all(configs).then(finals => {
+    pk8syaml.applyObjects(...finals);
+});
