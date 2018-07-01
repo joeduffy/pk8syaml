@@ -1,0 +1,3 @@
+name: pk8syaml-guestbook-aws-elasticache
+description: The standard Kubernetes Guestbook, provisioned using Pulumi, using AWS ElastiCache for Redis.
+runtime: nodejs
