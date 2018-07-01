@@ -58,6 +58,8 @@ This example is obviously just that, an example, but hopefully it is thought pro
     $ pulumi up
     ```
 
+    <img src="./images/up.png" width=600 />
+
 5. Marvel at the fact that AWS resources and Kubernetes are now co-existing in harmony!  Try making some edits and
    running `pulumi up`, it will figure out the minimal set of changes to be made, and orchestrate them automatically.
    Rinse, repeat.
@@ -68,3 +70,5 @@ This example is obviously just that, an example, but hopefully it is thought pro
     $ pulumi destroy --yes
     $ pulumi stack rm --yes
     ```
+
+    <img src="./images/down.png" width=600 />
