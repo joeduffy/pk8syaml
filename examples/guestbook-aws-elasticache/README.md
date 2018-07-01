@@ -8,7 +8,7 @@ of the control plane, integration with AWS's networking features such as subnets
 sizing, and automatic backup snapshotting.
 
 This leverages the pk8syaml library to use the Kubernetes YAML configuration mostly as-is, substituting the
-Redis address auto-assigned by AWS ElastiCache.  pk7syaml is meant to make it easy to port programs incrementally.
+Redis address auto-assigned by AWS ElastiCache.  pk8syaml is meant to make it easy to port programs incrementally.
 More of the program could be rewritten in a real language, for example, as in
 https://github.com/pulumi/examples/tree/master/kubernetes-ts-guestbook.
 
