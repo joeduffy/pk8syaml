@@ -1,6 +1,6 @@
 {
   "name": "pk8syaml",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Evaluate Kubernetes YAML to produce Pulumi resources.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
