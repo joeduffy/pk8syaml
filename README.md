@@ -17,4 +17,12 @@ and deployed homogeneously.  Of course, it gets more interesting when you
 [port the YAML configuration to real code](https://github.com/pulumi/examples/tree/master/kubernetes-ts-guestbook),
 eliminating the need to do string substitution, and unlocking the full power of programming languages.
 
+pk8syaml is published to NPM, and may be installed simply as
+
+```
+$ npm install pk8syaml
+```
+
+It is meant to be used with [Pulumi](https://pulumi.io), so be sure to [install it](https://pulumi.io/install) first.
+
 It's also worth noting that this library is just a few dozen lines of JavaScript built atop the Pulumi platform.
