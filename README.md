@@ -1,5 +1,7 @@
 # Pulumi Kubernetes YAML Bridge (pk8syaml)
 
+<img src="./images/bridge.jpg" align="right" width=350 />
+
 This bridge lets you deploy standard [Kubernetes YAML](https://kubernetes.io/docs/concepts/configuration/) files
 using [Pulumi](https://pulumi.io).  This enables a few interesting scenarios
 
