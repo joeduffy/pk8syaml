@@ -21,7 +21,11 @@ And then in your Pulumi program, simply point it at the desired YAML files
 ```javascript
 'use strict';
 let pk8syaml = require("pk8syaml");
-pk8syaml.apply("./path/to/some-kubernetes-config.yaml", ..., "./path/to/more-kubernetes-config.yaml");
+pk8syaml.apply([
+    "./path/to/some-kubernetes-config.yaml",
+    ...,
+    "./path/to/more-kubernetes-config.yaml",
+]);
 ```
 
 To use this library, make sure [install Pulumi](https://pulumi.io/install) first.
