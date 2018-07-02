@@ -53,7 +53,7 @@ export function applyObjects(nodes: any[], replmap?: {[key: string]: Object}): p
         if (node) {
             // If there's a replacement map, use it to substitute elements of the tree.
             if (replmap) {
-                node = traverse(node).map(function (v: any) {
+                traverse(node).forEach(function (v: any) {
                     if (typeof v === "string") {
                         for (let k of Object.keys(replmap)) {
                             // In preview mode, we will substitute a dummy text value; otherwise, what's in the map.
