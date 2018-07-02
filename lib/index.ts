@@ -56,8 +56,9 @@ export function applyObjects(nodes: any[], replmap?: {[key: string]: Object}): p
                 node = traverse(node).map(function (v: any) {
                     if (typeof v === "string") {
                         for (let k of Object.keys(replmap)) {
+                            // In preview mode, we will substitute a dummy text value; otherwise, what's in the map.
+                            const replw = (pulumi.runtime.isDryRun() ? "<unknown>" : replmap[k]);
                             const templ = `{{${k}}}`;
-                            const replw = replmap[k];
                             if (v === templ) {
                                 this.update(replw);
                                 break;
