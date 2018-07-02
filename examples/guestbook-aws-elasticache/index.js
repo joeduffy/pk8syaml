@@ -17,15 +17,8 @@ const redis = new aws.elasticache.ReplicationGroup("redis", {
     numberCacheClusters: 2,
 });
 
-// Load our Kubernetes YAML files into their in-memory object equivalents, and patch them.
-const cfgrepl = require("./cfgrepl");
-const replaceRedisAddress = cfgrepl("{{redis}}", redis.primaryEndpointAddress);
-const configs = [
-    fs.readFile("./config/frontend-deployment.yaml").then(file => yaml.safeLoad(file)).then(replaceRedisAddress),
-    fs.readFile("./config/frontend-service.yaml").then(file => yaml.safeLoad(file)).then(replaceRedisAddress),
-];
-
-// Finally, when the files are loaded, and patched, we can apply the configuration safely.
-Promise.all(configs).then(finals => {
-    pk8syaml.applyObjects(...finals);
-});
+// Load our Kubernetes YAML files, substituting the Redis values with our endpoint address.
+pk8syaml.apply([
+    "./config/frontend-deployment.yaml",
+    "./config/frontend-service.yaml",
+], { redis: redis.primaryEndpointAddress });

@@ -2,6 +2,6 @@
     "name": "pk8syaml-guestbook",
     "dependencies": {
         "@pulumi/pulumi": "latest",
-        "pk8syaml": "^0.1.0"
+        "pk8syaml": "^0.1.7"
     }
 }
