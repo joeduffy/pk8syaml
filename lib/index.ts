@@ -7,7 +7,7 @@ import * as yaml from "js-yaml";
 // apply simply takes a list of paths to Kubernetes YAML/JSON files, parses each -- in the order specified -- and
 // creates a set of Pulumi objects from these resources.  Because the semantics of Kubernetes configuration is that
 // resources are created in-order, all resource creation is serialized, one after the other.
-export async function apply(...paths: string[]): Promise<void> {
+export async function apply(...paths: string[]): Promise<pulumi.Resource[]> {
     let nodes = [];
     for (let path of paths) {
         const file = await fs.readFile(path, "utf-8");
@@ -17,42 +17,46 @@ export async function apply(...paths: string[]): Promise<void> {
             nodes.push(yaml.safeLoad(file));
         }
     }
-    applyObjects(nodes);
+    return applyObjects(nodes);
 }
 
 // applyJSONs takes a list of Kubernetes JSON files as in-memory blobs of text, parses each -- in the order specified
 // -- and creates a set of Pulumi objects from these resources.  Because the semantics of Kubernetes configuration is
 // that resources are created in-order, all resource creation is serialized, one after the other.
-export function applyJSONs(...files: string[]): void {
+export function applyJSONs(...files: string[]): pulumi.Resource[] {
     let nodes = [];
     for (let file of files) {
         nodes.push(JSON.parse(file));
     }
-    applyObjects(nodes);
+    return applyObjects(nodes);
 }
 
 // applyYAMLs takes a list of Kubernetes YAML files as in-memory blobs of text, parses each -- in the order specified
 // -- and creates a set of Pulumi objects from these resources.  Because the semantics of Kubernetes configuration is
 // that resources are created in-order, all resource creation is serialized, one after the other.
-export function applyYAMLs(...files: string[]): void {
+export function applyYAMLs(...files: string[]): pulumi.Resource[] {
     let nodes = [];
     for (let file of files) {
         nodes.push(yaml.safeLoad(file));
     }
-    applyObjects(nodes);
+    return applyObjects(nodes);
 }
 
 // applyObjects takes a list of Kubernetes configuration objects and creates a set of Pulumi objects from these
 // resources.  Because the semantics of Kubernetes configuration is that resources are created in-order, all
 // resource creation is serialized, one object after the other, meaning there will be no parallelism.
-export function applyObjects(...nodes: any[]): void {
+export function applyObjects(...nodes: any[]): pulumi.Resource[] {
+    let resources: pulumi.Resource[] = [];
     let prior: pulumi.Resource | undefined;
     for (let node of nodes) {
         if (node) {
-            prior = new (pulumi.CustomResource as any)(
+            const res = new (pulumi.CustomResource as any)(
                 getType(node), node.metadata.name, node, { dependsOn: prior && [ prior ] });
+            prior = res;
+            resources.push(res);
         }
     }
+    return resources;
 }
 
 // getType produces a Pulumi type token given a Kubernetes config node.
