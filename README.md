@@ -28,7 +28,7 @@ pk8syaml.apply([
 ]);
 ```
 
-To use this library, make sure [install Pulumi](https://pulumi.io/install) first.
+To use this library, make sure to [install Pulumi](https://pulumi.io/install) first.
 
 ## Examples
 
